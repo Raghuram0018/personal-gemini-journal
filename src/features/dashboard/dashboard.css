@@ -1,0 +1,91 @@
+/* Scoped Dashboard Styles for Personal Gemini Journal Home Page */
+
+.dashboard-grid-pattern {
+  background-image: radial-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dashboard-card-glow {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  transition: all 0.2s ease-in-out;
+}
+
+.dashboard-card-glow:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.1);
+}
+
+/* Glass Hierarchy Levels */
+.glass-level-1 {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+}
+
+.glass-level-2 {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.8);
+}
+
+.glass-level-3 {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+/* Ambient Slow Background Motion */
+@keyframes ambientFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+    opacity: 0.25;
+  }
+}
+
+.dashboard-ambient-orb-1 {
+  animation: ambientFloat 18s ease-in-out infinite;
+}
+
+.dashboard-ambient-orb-2 {
+  animation: ambientFloat 24s ease-in-out infinite 4s;
+}
+
+/* Custom Scrollbar for Journal Lists and Textareas */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.6);
+}
+
+/* Reduced Motion Accessibility Overrides */
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-ambient-orb-1,
+  .dashboard-ambient-orb-2 {
+    animation: none !important;
+  }
+  
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

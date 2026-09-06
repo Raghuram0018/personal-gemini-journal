@@ -1,0 +1,4 @@
+/* Journal Feature Specific Styles */
+.journal-editor-boundary {
+  box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.08);
+}

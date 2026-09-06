@@ -1,0 +1,100 @@
+/* Personal Gemini Journal - Music Experience Styling */
+
+@keyframes vinylSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vinyl-disc {
+  box-shadow:
+    0 0 0 3px rgba(30, 41, 59, 0.9),
+    0 0 0 8px rgba(15, 23, 42, 0.95),
+    0 0 0 14px rgba(30, 41, 59, 0.6),
+    0 20px 40px -10px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+.vinyl-spin {
+  animation: vinylSpin 20s linear infinite;
+}
+
+.vinyl-spin-paused {
+  animation: vinylSpin 20s linear infinite;
+  animation-play-state: paused;
+}
+
+/* Audio Equalizer Bars */
+@keyframes eqBar1 {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+@keyframes eqBar2 {
+  0%, 100% { height: 14px; }
+  50% { height: 6px; }
+}
+
+@keyframes eqBar3 {
+  0%, 100% { height: 8px; }
+  50% { height: 20px; }
+}
+
+@keyframes eqBar4 {
+  0%, 100% { height: 18px; }
+  50% { height: 8px; }
+}
+
+.eq-bar-1 { animation: eqBar1 0.8s ease-in-out infinite; }
+.eq-bar-2 { animation: eqBar2 0.7s ease-in-out infinite; }
+.eq-bar-3 { animation: eqBar3 0.9s ease-in-out infinite; }
+.eq-bar-4 { animation: eqBar4 0.75s ease-in-out infinite; }
+
+/* Custom Progress Slider */
+input[type='range'].music-slider {
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+input[type='range'].music-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #a855f7;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+  margin-top: -4px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type='range'].music-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.3);
+  background: #c084fc;
+}
+
+input[type='range'].music-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: rgba(51, 65, 85, 0.7);
+  border-radius: 9999px;
+}
+
+/* Glassmorphic track item */
+.music-track-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.music-track-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.15);
+}
+
+/* Glowing text aura */
+.glow-purple {
+  text-shadow: 0 0 16px rgba(168, 85, 247, 0.45);
+}

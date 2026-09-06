@@ -1,0 +1,4 @@
+/* Calendar Feature Specific Styles */
+.calendar-glass-surface {
+  backdrop-filter: blur(8px);
+}

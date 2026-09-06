@@ -1,0 +1,4 @@
+/* Mood Feature Specific Styles */
+.mood-wave-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.08) 0%, transparent 80%);
+}

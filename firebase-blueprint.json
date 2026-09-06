@@ -1,0 +1,118 @@
+{
+  "entities": {
+    "Book": {
+      "title": "Book Memory Log",
+      "description": "User digital book log with highlights, reading sessions and metadata, fully user-isolated",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "externalId": { "type": "string" },
+        "isbn": { "type": "string" },
+        "title": { "type": "string" },
+        "authors": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "categories": { "type": "array", "items": { "type": "string" } },
+        "publisher": { "type": "string" },
+        "publishedDate": { "type": "string" },
+        "pageCount": { "type": "integer" },
+        "readingStatus": { "type": "string", "enum": ["reading", "completed", "want_to_read"] },
+        "progress": { "type": "integer" },
+        "currentPage": { "type": "integer" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "authors", "readingStatus", "progress", "createdAt", "updatedAt"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "User account profile document isolated by UID",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "AIPermission": {
+      "title": "AI Permissions",
+      "description": "Granular toggles determining which personal data streams are accessible by Gemini",
+      "type": "object",
+      "properties": {
+        "journal": { "type": "boolean", "default": false },
+        "goals": { "type": "boolean", "default": false },
+        "calendar": { "type": "boolean", "default": false },
+        "books": { "type": "boolean", "default": false },
+        "music": { "type": "boolean", "default": false },
+        "mood": { "type": "boolean", "default": false },
+        "memories": { "type": "boolean", "default": false }
+      },
+      "required": ["journal", "goals", "calendar", "books", "music", "mood", "memories"]
+    },
+    "UserSettings": {
+      "title": "User Settings",
+      "description": "Unified Settings document containing permissions and security parameters",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "aiPermissions": { "$ref": "#/entities/AIPermission" },
+        "security": {
+          "type": "object",
+          "properties": {
+            "pinLocked": { "type": "boolean", "default": false },
+            "pinHash": { "type": "string" },
+            "pinHint": { "type": "string" }
+          },
+          "required": ["pinLocked"]
+        },
+        "theme": { "type": "string", "enum": ["light", "dark", "cinematic"], "default": "dark" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "aiPermissions", "security", "theme", "updatedAt"]
+    },
+    "MoodRecord": {
+      "title": "Mood Record",
+      "description": "Individual emotional state log with intensity and canonical relationships (excluding goals)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "mood": { "type": "string" },
+        "emotions": { "type": "array", "items": { "type": "string" } },
+        "intensity": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "note": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "time": { "type": "string", "format": "time" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "journalIds": { "type": "array", "items": { "type": "string" } },
+        "calendarEventIds": { "type": "array", "items": { "type": "string" } },
+        "musicActivityIds": { "type": "array", "items": { "type": "string" } },
+        "bookIds": { "type": "array", "items": { "type": "string" } },
+        "memoryIds": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["id", "userId", "mood", "emotions", "intensity", "date", "time", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User root document with subcollections isolated by UID"
+    },
+    "/users/{userId}/settings/permissions": {
+      "schema": "UserSettings",
+      "description": "Unified settings collection storing AI permissions, security controls, and pin hashes"
+    },
+    "/users/{userId}/books/{bookId}": {
+      "schema": "Book",
+      "description": "User-isolated collection containing books, highlights, reading progress, and canonical connections"
+    },
+    "/users/{userId}/moods/{moodId}": {
+      "schema": "MoodRecord",
+      "description": "User-isolated collection for emotional tracking records"
+    }
+  }
+}

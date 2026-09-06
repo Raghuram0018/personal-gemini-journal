@@ -1,0 +1,10 @@
+{
+  "name": "Personal Gemini Journal",
+  "description": "A secure, authenticated personal life and memory journal with Gemini AI insights, goal tracking, and memories.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
