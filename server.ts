@@ -98,7 +98,8 @@ async function generateWithModelFallback(
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  // Cloud Run sets process.env.PORT (default 8080 or custom port), while AI Studio development environment uses port 3000
+  const PORT = Number(process.env.PORT) || 8080;
 
   app.use(express.json({ limit: '1mb' }));
   app.use(express.urlencoded({ extended: true, limit: '1mb' }));
